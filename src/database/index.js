@@ -1,13 +1,12 @@
-const monk = require('monk');
+const mongoose = require('mongoose');
 
 const { MONGODB_URI } = process.env;
 
-const db = monk(MONGODB_URI, (err) => {
-  if (err) {
-    console.log('MongoDB connection could not be established', err);
-    return;
-  }
-  console.log('MongoDB connection has been established');
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+}, () => {
+  console.log('MongoDB connection has been established.');
 });
-
-module.exports = db;
