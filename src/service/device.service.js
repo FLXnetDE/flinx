@@ -14,12 +14,12 @@ async function getDevice(id, userId) {
 }
 
 // Create a new device with a given HTTP body and a users id
-async function createDevice(body, userId) {
-  const device = new Device(body);
-  device.deviceKey = uuid();
-  device.deviceSecret = uuid();
-  device.userId = userId;
-  const newDevice = await device.save();
+async function createDevice(device, userId) {
+  const d = new Device(device);
+  d.deviceKey = uuid();
+  d.deviceSecret = uuid();
+  d.userId = userId;
+  const newDevice = await d.save();
   return newDevice;
 }
 

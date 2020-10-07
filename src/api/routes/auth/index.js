@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const CustomError = require('../../middlewares/customError');
+const CustomError = require('../../../util/customError');
 const User = require('../../../database/schema/user.schema');
 const middlewares = require('../../middlewares');
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const deviceService = require('../../../service/device.service');
-const CustomError = require('../../middlewares/customError');
+const CustomError = require('../../../util/customError');
 
 const app = express();
 app.use(express.json());

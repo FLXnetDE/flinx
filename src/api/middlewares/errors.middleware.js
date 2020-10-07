@@ -1,4 +1,4 @@
-const CustomError = require('./customError');
+const CustomError = require('../../util/customError');
 
 function notFound(req, res, next) {
   next(new CustomError(404, `🔍 - Not Found - ${req.originalUrl}`));
