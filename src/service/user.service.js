@@ -12,12 +12,27 @@ async function getUserByUsername(username) {
   return user;
 }
 
-// Handle user login
+// Set the last login of a given user
+async function setLastLogin(id, date = Date.now()) {
+  const updatedUser = await User.findOneAndUpdate({
+    _id: id,
+  }, {
+    $set: {
+      lastLogin: date,
+    },
+  }, {
+    new: true,
+  });
+  return updatedUser;
+}
+
+// ToDo: Handle user login
 async function login(username, password) {
+  setLastLogin(null, null);
   return [username, password];
 }
 
-// Handle user registration
+// ToDo: Handle user registration
 async function register(registrationBody) {
   return registrationBody;
 }

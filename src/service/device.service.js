@@ -13,6 +13,11 @@ async function getDevice(id, userId) {
   return device;
 }
 
+async function getDeviceByDeviceId(deviceId) {
+  const device = await Device.findOne({ deviceId });
+  return device;
+}
+
 // Create a new device with a given HTTP body and a users id
 async function createDevice(device, userId) {
   const d = new Device(device);
@@ -29,9 +34,35 @@ async function deleteDevice(id, userId) {
   return deleted;
 }
 
+// Authenticate a MQTT client to connect to the broker
+function authenticateClient(client, username, password, callback) {
+  const deviceId = client.id;
+  const deviceKey = username;
+  const deviceSecret = password;
+  Device.findOne({
+    deviceId,
+    deviceKey,
+    deviceSecret,
+  }).then((device) => {
+    if (!device) {
+      callback(null, false);
+      return;
+    }
+    if (device.isLocked) {
+      callback(null, false);
+      return;
+    }
+    callback(null, true);
+  }).catch((err) => {
+    callback(err, false);
+  });
+}
+
 module.exports = {
   getDevices,
   getDevice,
+  getDeviceByDeviceId,
   createDevice,
   deleteDevice,
+  authenticateClient,
 };

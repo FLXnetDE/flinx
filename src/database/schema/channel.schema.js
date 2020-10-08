@@ -25,6 +25,8 @@ const channelSchema = new Schema({
     },
   ],
   data: [dataSchema],
+}, {
+  timestamps: true,
 });
 
 const Channel = mongoose.model('Channel', channelSchema, 'channels');

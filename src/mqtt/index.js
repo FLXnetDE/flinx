@@ -1,13 +1,14 @@
 const aedes = require('aedes')();
 const net = require('net');
+const deviceService = require('../service/device.service');
+const channelService = require('../service/channel.service');
 
 const server = net.createServer(aedes.handle);
-const mqttAuthenticationHandler = require('./mqttAuthenticationHandler');
 const mqttHandler = require('./mqttHandler');
 
-aedes.authenticate = mqttAuthenticationHandler.authenticateClient;
-aedes.authorizePublish = mqttAuthenticationHandler.authorizePublish;
-aedes.authorizeSubscribe = mqttAuthenticationHandler.authorizeSubscribe;
+aedes.authenticate = deviceService.authenticateClient;
+aedes.authorizePublish = channelService.authorizePublish;
+aedes.authorizeSubscribe = channelService.authorizeSubscribe;
 
 aedes.on('client', mqttHandler.handleConnect);
 aedes.on('clientDisconnect', mqttHandler.handleDisconnect);
