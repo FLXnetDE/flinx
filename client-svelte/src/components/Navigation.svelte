@@ -21,35 +21,6 @@
             Dashboard
           </a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-database"></i>
-            Channels
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {#await getChannels()}
-              <a class="dropdown-item" href="#/">
-                <i class="fas fa-spinner"></i>
-                Loading channels...
-              </a>
-            {:then channels} 
-              <ul class="list-group">
-                {#each channels as channel}
-                  <a class="dropdown-item" href="#/channel/{channel._id}">
-                    <i class="fas fa-columns"></i>
-                    {channel.name}
-                    <span class="badge badge-success float-right">{channel.data.length}</span>
-                  </a>
-                {/each}
-              </ul>
-            {:catch error}
-              <a class="dropdown-item" href="#/">
-                <i class="fas fa-exclamation-triangle"></i>
-                Channels could not be loaded.
-              </a>
-            {/await}
-          </div>
-        </li>
       {/if}
     </ul>
     <ul class="navbar-nav ml-auto">
